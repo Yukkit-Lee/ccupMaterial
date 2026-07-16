@@ -9,7 +9,7 @@ from docx.shared import Pt, Cm
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "result" / "智检云盾商业计划书（写作指导重写版）.md"
 WORK_MD = ROOT / "result" / "_build_word.md"
-OUTPUT = ROOT / "result" / "智检云盾商业计划书（图表修复版）.docx"
+OUTPUT = ROOT / "result" / "智检云盾商业计划书（图表优化版）.docx"
 
 text = SOURCE.read_text(encoding="utf-8")
 text = text.replace("charts/delivery-flow.png", "word_charts/delivery-flow.jpg")
