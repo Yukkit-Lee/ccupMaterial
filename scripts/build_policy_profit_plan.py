@@ -7,9 +7,9 @@ from docx.shared import Cm, Pt, RGBColor
 
 ROOT=Path(__file__).resolve().parents[1]; RESULT=ROOT/'result'
 BASE=RESULT/'智检云盾商业计划书（正式提交版·完整）.md'
-OUTMD=RESULT/'智检云盾商业计划书（政策与盈利修订版）.md'
+OUTMD=RESULT/'智检云盾商业计划书（政策与盈利修订版·高清图表版）.md'
 WORK=RESULT/'_policy_profit_build.md'
-OUT=RESULT/'智检云盾商业计划书（政策与盈利修订版）.docx'
+OUT=RESULT/'智检云盾商业计划书（政策与盈利修订版·高清图表版）.docx'
 
 def between(text, start, end, new):
     a=text.index(start); b=text.index(end,a); return text[:a]+new+'\n\n'+text[b:]
@@ -182,6 +182,7 @@ refs='''# 十一、政策、数据来源与提交前核验
 4. 真实工时、供应商询价、报价单、成本台账与资金来源；
 5. 竞赛匿名要求：提交版应按通知删除学校名称、标识和指导教师姓名。'''
 text=text[:text.index('# 十、未来展望')] + future + '\n'
+text=text.replace('charts/delivery-flow.png', 'policy_profit_charts/delivery-flow.png')
 text=text.replace(
     '| 成员 | 当前角色 | 核心职责 | 近期可交付成果 |',
     '团队成员的职责分工、近期交付物及协作边界如表 6.1 所示。\n\n表 6.1  团队成员职责与近期交付物\n\n| 成员 | 当前角色 | 核心职责 | 近期可交付成果 |'
@@ -205,7 +206,6 @@ for caption, introduction in introductions.items():
 text=re.sub(r' +\n', '\n', text)
 OUTMD.write_text(text,encoding='utf-8')
 word=text.replace('policy_profit_charts/','policy_profit_word_charts/').replace('.png)', '.jpg)')
-word=word.replace('charts/delivery-flow.jpg', 'word_charts/delivery-flow.jpg')
 WORK.write_text(word,encoding='utf-8')
 pandoc=Path(r'C:\Program Files\Pandoc\pandoc.exe')
 subprocess.run([str(pandoc),str(WORK),'--from','gfm+pipe_tables','--resource-path',str(RESULT),'--output',str(OUT)],check=True,cwd=ROOT)
